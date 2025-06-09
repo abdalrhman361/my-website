@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>موقع المشتري</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>اختر المنتج للشراء</h1>
+  <div class="products">
+
+    <div class="product">
+      <img src="https://via.placeholder.com/150?text=ساعة" alt="ساعة ذكية">
+      <h3>ساعة ذكية</h3>
+      <button onclick="buy('ساعة ذكية')">شراء الآن</button>
+    </div>
+
+    <div class="product">
+      <img src="https://via.placeholder.com/150?text=هاتف" alt="هاتف محمول">
+      <h3>هاتف محمول</h3>
+      <button onclick="buy('هاتف محمول')">شراء الآن</button>
+    </div>
+
+    <div class="product">
+      <img src="https://via.placeholder.com/150?text=لاب+توب" alt="لاب توب">
+      <h3>لاب توب</h3>
+      <button onclick="buy('لاب توب')">شراء الآن</button>
+    </div>
+
+    <div class="product">
+      <img src="https://via.placeholder.com/150?text=سماعات" alt="سماعات بلوتوث">
+      <h3>سماعات بلوتوث</h3>
+      <button onclick="buy('سماعات بلوتوث')">شراء الآن</button>
+    </div>
+
+    <div class="product">
+      <img src="https://via.placeholder.com/150?text=كاميرا" alt="كاميرا">
+      <h3>كاميرا</h3>
+      <input onclick="name(Text)" type="text">
+      <button onclick="buy('كاميرا')">شراء الآن</button>
+    </div>
+
+    <div class="product">
+      <img src="https://via.placeholder.com/150?text=تابلت" alt="تابلت">
+      <h3>تابلت</h3>
+      <button onclick="buy('تابلت')">شراء الآن</button>
+    </div>
+
+    <div class="product">
+      <img src="https://via.placeholder.com/150?text=شاشة" alt="شاشة كمبيوتر">
+      <h3>شاشة كمبيوتر</h3>
+      <button onclick="buy('شاشة كمبيوتر')">شراء الآن</button>
+    </div>
+
+    <div class="product">
+      <img src="https://via.placeholder.com/150?text=كيبورد" alt="كيبورد ميكانيكي">
+      <h3>كيبورد ميكانيكي</h3>
+      <button onclick="buy('كيبورد ميكانيكي')">شراء الآن</button>
+    </div>
+
+    <div class="product">
+      <img src="https://via.placeholder.com/150?text=ماوس" alt="ماوس احترافي">
+      <h3>ماوس احترافي</h3>
+      <button onclick="buy('ماوس احترافي')">شراء الآن</button>
+    </div>
+
+    <div class="product">
+      <img src="https://via.placeholder.com/150?text=مكبر" alt="مكبر صوت">
+      <h3>مكبر صوت</h3>
+      <button onclick="buy('مكبر صوت')">شراء الآن</button>
+    </div>
+  </div>
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<script>
+  const socket = io("http://localhost:3000");
+
+  function buy(productName)  {
+      const phone = "+201028925579"; // ← غيّر الرقم لرقم البائع (دون +)
+    const user = {
+      phone: phone,
+      product: productName
+    };
+    socket.emit("purchase", user);
+    alert("تم إرسال طلب الشراء!");
+      const message = `مرحبًا، أرغب في شراء المنتج: ${productName}`;
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
+  }
+</script>
+</body>
+</html>
