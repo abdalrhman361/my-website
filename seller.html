@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>موقع البائع</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>الطلبات الواردة</h1>
+  <div id="orders"></div>
+
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<script>
+  const socket = io("http://localhost:3000");
+
+  socket.on("new-purchase", (data) => {
+    const el = document.createElement("div");
+    el.className = "order";
+    el.innerHTML = `
+      <strong>🚨 طلب جديد:</strong><br>
+      الاسم: ${data.name}<br>
+      الرقم: ${data.phone}<br>
+      المنتج: ${data.product}
+    `;
+    document.getElementById("orders").prepend(el);
+  });
+</script>
+</body>
+</html>
